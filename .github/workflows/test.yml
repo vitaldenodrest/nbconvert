@@ -21,6 +21,5 @@ jobs:
       
       - name: Execute action
         uses: ./
-        id: my_test_run
         with:
           environment-file: ./test_env.yml
