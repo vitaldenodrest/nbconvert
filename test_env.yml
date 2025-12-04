@@ -1,0 +1,13 @@
+name: 'test-env'
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - matplotlib==3.10.6
+  - ipython
+  - ipykernel
+  - ipympl
+  - nbconvert
