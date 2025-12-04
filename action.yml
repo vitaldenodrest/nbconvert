@@ -20,24 +20,13 @@ runs:
     - name: Setup Miniconda
       uses: conda-incubator/setup-miniconda@v3
       with:
-        auto-update-conda: true
-        auto-activate-base: true
+        environment-file: ${{ inputs.environment-file }}
+        auto-activate-base: false
+        activate-environment: 'notebook'
 
-    - name: Update Base Environment with User Dependencies
-      shell: bash -l {0}
+    - name: Ensure Jupyter tools are installed
       run: |
-        echo "Merging ${{ inputs.environment-file }} into base environment..."
-        conda env update --name base --file ${{ inputs.environment-file }}
-
-    - name: Ensure Convert tools are installed
-      shell: bash -l {0} 
-      run: |
-        if ! command -v jupyter &> /dev/null; then
-            echo "Jupyter not found, installing..."
-            conda install -y jupyter nbconvert || pip install jupyter nbconvert
-        else
-            echo "Jupyter is already installed."
-        fi
+        conda install -y jupyter nbconvert || pip install jupyter nbconvert
 
     - name: Run and compile notebooks recursively
       shell: bash -l {0}
