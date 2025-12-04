@@ -20,6 +20,6 @@ jobs:
         uses: actions/checkout@v6.0.1
       
       - name: Execute action
-        uses: ./nbconvert
+        uses: ../
         with:
           environment-file: ./test_env.yml
