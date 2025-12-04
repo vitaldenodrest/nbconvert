@@ -22,9 +22,10 @@ runs:
       with:
         environment-file: ${{ inputs.environment-file }}
         auto-activate-base: false
-        activate-environment: 'notebook'
+        activate-environment: 'notebook-env'
 
     - name: Ensure Jupyter tools are installed
+      shell: bash -l {0}
       run: |
         conda install -y jupyter nbconvert || pip install jupyter nbconvert
 
