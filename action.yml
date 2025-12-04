@@ -7,39 +7,36 @@ branding:
   color: "purple"
 
 
-input:
+inputs:
   environment-file:
     description: 'Path to the conda env file required to run and export notebooks'
     required: true
 
 
-
 runs:
-
   using: "composite"
-
   steps:
-
-    - name: .ipynb
-      uses: actions/checkout@v6
-      with:
-        sparse-checkout-cone-mode: false
-        sparse-checkout: |
-          **/*.ipynb
-          ${{ inputs.environment-file }}
 
     - name: Setup Miniconda
       uses: conda-incubator/setup-miniconda@v3
       with:
+        activate-environment: "" 
         environment-file: ${{ inputs.environment-file }}
+        auto-activate-base: false
 
     - name: Ensure Convert tools are installed
-      shell: bash
+      shell: bash -l {0} 
       run: |
-        conda install -y jupyter nbconvert || pip install jupyter nbconvert
+        if ! command -v jupyter &> /dev/null; then
+            echo "Jupyter not found, installing..."
+            conda install -y jupyter nbconvert || pip install jupyter nbconvert
+        else
+            echo "Jupyter is already installed."
+        fi
 
     - name: Run and compile notebooks recursively
-      shell: bash
+      shell: bash -l {0}
       run: |
         shopt -s globstar
+        echo "Converting notebooks..."
         jupyter nbconvert --to html --execute **/*.ipynb
