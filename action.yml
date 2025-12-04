@@ -33,10 +33,12 @@ runs:
         environment-file: ${{ inputs.environment-file }}
 
     - name: Ensure Convert tools are installed
+      shell: bash
       run: |
         conda install -y jupyter nbconvert || pip install jupyter nbconvert
 
     - name: Run and compile notebooks recursively
+      shell: bash
       run: |
         shopt -s globstar
         jupyter nbconvert --to html --execute **/*.ipynb
