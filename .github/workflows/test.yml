@@ -23,6 +23,8 @@ jobs:
         uses: ./
         with:
           environment-file: ./tests/test_env.yml
+          enable-html: 'true'
+          enable-pdf: 'true'
 
       - name: Upload results as artifacts
         uses: actions/upload-artifact@v5.0.0
