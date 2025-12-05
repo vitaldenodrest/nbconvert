@@ -22,8 +22,6 @@ runs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         environment-file: ${{ inputs.environment-file }}
-        auto-activate-base: false
-        activate-environment: 'notebook-env'
 
     - name: Ensure Jupyter tools are installed
       shell: bash -l {0}

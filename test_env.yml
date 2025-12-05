@@ -1,4 +1,4 @@
-name: 'notebook-env'
+name: 'any-name'
 channels:
   - conda-forge
   - defaults
@@ -7,6 +7,7 @@ dependencies:
   - pip
   - pip:
     - matplotlib==3.10.6
+  - sympy
   - ipython
   - ipykernel
   - ipympl

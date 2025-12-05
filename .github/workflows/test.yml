@@ -23,3 +23,9 @@ jobs:
         uses: ./
         with:
           environment-file: test_env.yml
+
+      - name: Upload results as artifacts
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: compiled-notebooks
+          path: "**/*.html"
