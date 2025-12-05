@@ -22,7 +22,7 @@ jobs:
       - name: Execute action
         uses: ./
         with:
-          environment-file: test_env.yml
+          environment-file: ./tests/test_env.yml
 
       - name: Upload results as artifacts
         uses: actions/upload-artifact@v5.0.0
