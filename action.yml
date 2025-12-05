@@ -31,6 +31,13 @@ runs:
   using: "composite"
   steps:
 
+    - name: Install TeX Live if .pdf
+      shell: bash -l {0}
+      run: |
+        if [${{ inputs.enable-pdf }} == 'true']; then   
+          sudo apt-get install texlive-xetex texlive-fonts-recommended texlive-plain-generic
+        fi
+
     - name: Setup Miniconda
       uses: conda-incubator/setup-miniconda@v3
       with:
@@ -45,5 +52,12 @@ runs:
       shell: bash -l {0}
       run: |
         shopt -s globstar
-        echo "Converting notebooks..."
-        jupyter nbconvert --to html --execute **/*.ipynb
+        if [${{ inputs.enable-html }} == 'true']; then
+          echo "Converting notebooks to html..."
+          jupyter nbconvert --to html --execute **/*.ipynb
+        fi
+        if 
+        if [${{ inputs.enable-pdf }} == 'true']; then
+          echo "Converting notebooks to pdf..."
+          jupyter nbconvert --to pdf --execute **/*.ipynb
+        fi
