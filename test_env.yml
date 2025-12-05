@@ -1,4 +1,4 @@
-name: 'notebook-env'
+name: 'any-name'
 channels:
   - conda-forge
   - defaults
