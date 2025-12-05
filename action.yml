@@ -56,7 +56,6 @@ runs:
           echo "Converting notebooks to html..."
           jupyter nbconvert --to html --execute **/*.ipynb
         fi
-        if 
         if ${{ inputs.enable-pdf }}; then
           echo "Converting notebooks to pdf..."
           jupyter nbconvert --to pdf --execute **/*.ipynb
