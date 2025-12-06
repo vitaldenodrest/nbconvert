@@ -19,20 +19,27 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       
-      - name: Execute action
+      - name: Execute action (HTML)
         uses: ./
         with:
           environment-file: ./tests/test_env.yml
           enable-html: true
+          enable-pdf: false
+
+      - name: Execute action (PDF)
+        uses: ./
+        with:
+          environment-file: ./tests/test_env.yml
+          enable-html: false
           enable-pdf: true
 
-      - name: Upload html results as artifacts
+      - name: Upload HTML results as artifacts
         uses: actions/upload-artifact@v5.0.0
         with:
           name: compiled-notebooks-html
           path: "**/*.html"
 
-      - name: Upload pdf results as artifacts
+      - name: Upload PDF results as artifacts
         uses: actions/upload-artifact@v5.0.0
         with:
           name: compiled-notebooks-pdf
