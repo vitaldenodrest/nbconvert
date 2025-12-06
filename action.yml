@@ -26,6 +26,12 @@ inputs:
     required: false
     default: false
 
+  enable-py:
+    description: 'Should the notebooks be exported as Python scripts?'
+    type: boolean
+    required: false
+    default: false
+
 
 runs:
   using: "composite"
@@ -59,4 +65,8 @@ runs:
         if ${{ inputs.enable-pdf }}; then
           echo "Converting notebooks to pdf..."
           jupyter nbconvert --to pdf --execute **/*.ipynb
+        fi
+        if ${{ inputs.enable-py }}; then
+          echo "Converting notebooks to Python scripts..."
+          jupyter nbconvert --to script **/*.ipynb
         fi
